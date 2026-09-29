@@ -1,0 +1,37 @@
+:root {
+  --bg: #0b0d1a; /* page background, ink navy */
+  --surface: #161a2c; /* card frames, modals, buttons */
+  --field: #0f1222; /* input background */
+  --text: #eceaf6;
+  --muted: #a3a6bf; /* secondary text, icons */
+  --accent: #b4beff; /* periwinkle: primary buttons, highlights */
+  --on-accent: #0b0d1a; /* text on accent */
+  --glow: rgba(180, 190, 255, 0.3);
+  --line: rgba(236, 234, 246, 0.1); /* hairlines, borders */
+  --star: #e6e9ff;
+  --haze-1: rgba(118, 92, 214, 0.34); /* violet nebula */
+  --haze-2: rgba(64, 120, 214, 0.22); /* blue nebula */
+  --danger: #ff9e9e; /* delete only */
+  --placeholder: #7c7f99; /* input placeholder text */
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --pad-x: 72px;
+
+  color-scheme: dark;
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --pad-x: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --pad-x: 20px;
+  }
+}

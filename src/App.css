@@ -1,0 +1,21 @@
+.main:focus {
+  outline: none;
+}
+
+.gallery {
+  padding: 48px var(--pad-x) 120px;
+}
+
+/* Empty / no-results / error blocks carry their own padding */
+.gallery--bare {
+  padding: 0;
+}
+
+@media (max-width: 767px) {
+  .gallery {
+    padding: 32px var(--pad-x) 80px;
+  }
+  .gallery--bare {
+    padding: 0;
+  }
+}

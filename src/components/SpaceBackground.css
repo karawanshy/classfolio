@@ -1,0 +1,181 @@
+.space {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.space-haze {
+  position: absolute;
+  border-radius: 50%;
+  animation: haze-breathe 18s ease-in-out infinite;
+}
+
+.space-haze--violet {
+  width: 1100px;
+  height: 900px;
+  left: calc(85% - 550px);
+  top: calc(10% - 450px);
+  background: radial-gradient(closest-side, var(--haze-1), transparent);
+}
+
+.space-haze--blue {
+  width: 1000px;
+  height: 900px;
+  left: -420px;
+  top: calc(45% - 450px);
+  background: radial-gradient(closest-side, var(--haze-2), transparent);
+  animation-delay: -6s;
+}
+
+.space-haze-dim {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+}
+
+.space-haze--violet-low {
+  width: 900px;
+  height: 760px;
+  left: calc(78% - 450px);
+  top: calc(92% - 380px);
+  background: radial-gradient(closest-side, var(--haze-1), transparent);
+  animation-delay: -12s;
+}
+
+/* Each star layer travels one full tile up-left and loops: far layers slowest (parallax). */
+.space-drift {
+  position: absolute;
+  inset: 0;
+  animation: star-drift linear infinite;
+  will-change: transform;
+}
+
+.space-drift--1 {
+  animation-duration: 420s;
+}
+.space-drift--2 {
+  animation-duration: 260s;
+}
+.space-drift--3 {
+  animation-duration: 150s;
+}
+
+.space-star-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background: transparent;
+  opacity: 0.6;
+}
+
+.space-star-layer--1 {
+  animation: star-twinkle 7s ease-in-out -2s infinite;
+}
+.space-star-layer--2 {
+  animation: star-twinkle 11s ease-in-out -7s infinite;
+}
+.space-star-layer--3 {
+  animation: star-twinkle 5s ease-in-out -3.5s infinite;
+}
+
+@keyframes haze-breathe {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes star-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100vw, -100vh, 0);
+  }
+}
+
+/* ---- Shooting stars: rare, faint streaks ---- */
+
+.shooting-star {
+  position: absolute;
+  width: 140px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(230, 233, 255, 0), var(--star));
+  opacity: 0;
+  transform-origin: left center;
+  animation: shooting-star 17s ease-out infinite;
+}
+
+.shooting-star--1 {
+  top: 14%;
+  left: 72%;
+  animation-delay: 4s;
+}
+
+.shooting-star--2 {
+  top: 38%;
+  left: 94%;
+  animation-duration: 29s;
+  animation-delay: 13s;
+}
+
+@keyframes shooting-star {
+  0% {
+    opacity: 0;
+    transform: rotate(155deg) translateX(0);
+  }
+  1% {
+    opacity: 0.8;
+  }
+  5% {
+    opacity: 0;
+    transform: rotate(155deg) translateX(460px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(155deg) translateX(460px);
+  }
+}
+
+@media (max-width: 767px) {
+  .space-haze--violet {
+    width: 700px;
+    height: 620px;
+    left: calc(85% - 350px);
+    top: -260px;
+  }
+  .space-haze--blue {
+    width: 640px;
+    height: 620px;
+    left: -340px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-haze,
+  .space-drift,
+  .space-star-layer {
+    animation: none;
+  }
+  .shooting-star {
+    display: none;
+  }
+}

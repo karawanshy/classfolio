@@ -1,0 +1,249 @@
+.modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(24px, 16vh, 160px) 20px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 6, 14, 0.62);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: modal-fade 200ms ease both;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 60px 120px -40px rgba(0, 0, 0, 0.8);
+  animation: modal-in 260ms var(--ease-out) both;
+}
+
+.modal:focus {
+  outline: none;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--muted);
+  transition: color 200ms ease;
+}
+
+.modal-close:hover {
+  color: var(--text);
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+/* ---- Shared modal content ---- */
+
+.modal-eyebrow {
+  color: var(--accent);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.modal-text {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+/* ---- Fields ---- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.field-optional {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(236, 234, 246, 0.08);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.field-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--field);
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.field-input--url {
+  font-family: var(--font-mono);
+  font-size: 15px;
+}
+
+.field-input--optional {
+  border-style: dashed;
+  border-color: rgba(236, 234, 246, 0.18);
+}
+
+.field-input::placeholder {
+  color: var(--placeholder);
+}
+
+.field-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(180, 190, 255, 0.18);
+}
+
+.field-input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.field-input[aria-invalid='true']:focus {
+  box-shadow: 0 0 0 3px rgba(255, 158, 158, 0.16);
+}
+
+.field-error,
+.form-error {
+  color: var(--danger);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---- Bottom sheet (mobile add / edit) ---- */
+
+.modal-root--sheet {
+  padding: 56px 0 0;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.modal--sheet {
+  align-self: stretch;
+  max-width: none !important;
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  animation: sheet-in 300ms var(--ease-out) both;
+}
+
+.sheet-grab {
+  display: flex;
+  justify-content: center;
+  flex: none;
+  padding: 12px 0 8px;
+  touch-action: none;
+  cursor: grab;
+}
+
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(236, 234, 246, 0.22);
+}
+
+.modal--sheet .modal-close {
+  top: 12px;
+  right: 12px;
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (max-width: 767px) {
+  .modal-root:not(.modal-root--sheet) {
+    padding: 96px 20px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal-backdrop,
+  .modal--sheet {
+    animation: none;
+  }
+}

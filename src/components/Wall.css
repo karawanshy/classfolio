@@ -1,0 +1,138 @@
+.wall {
+  --gap-x: 32px;
+  --gap-y: 64px;
+  position: relative;
+}
+
+/* Positioned by the masonry layout in Wall.tsx */
+.wall-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc((100% - var(--gap-x) * 2) / 3);
+}
+
+/* Static column layout, used by the loading skeleton */
+.wall-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  column-gap: var(--gap-x);
+  align-items: start;
+}
+
+.wall-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-y);
+  min-width: 0;
+}
+
+.wall-item.is-exiting {
+  pointer-events: none;
+}
+
+/* The outer item's transform is owned by the layout, so exits animate the inner wrapper. */
+.wall-item.is-exiting > .reveal {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.wall-item.is-exiting--delete > .reveal {
+  transform: scale(0.96);
+  transition:
+    opacity 300ms ease,
+    transform 300ms var(--ease-out);
+}
+
+/* ---- Entrance: rise 24px and fade in, once per card ---- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Skeleton ---- */
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.skeleton-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.skeleton-host {
+  height: 12px;
+  width: 42%;
+  margin: 7px 8px 5px;
+  border-radius: 999px;
+}
+
+.skeleton-shot {
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+}
+
+.skeleton-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 4px;
+}
+
+.skeleton-bar {
+  border-radius: 999px;
+}
+
+.skeleton-bar--title {
+  height: 20px;
+  width: 55%;
+}
+
+.skeleton-bar--sub {
+  height: 12px;
+  width: 32%;
+}
+
+@media (max-width: 1199px) {
+  .wall {
+    --gap-x: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .wall {
+    --gap-y: 40px;
+  }
+  .skeleton-frame {
+    padding: 6px;
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .wall-item.is-exiting > .reveal {
+    transition: none;
+  }
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- Source for public/og.png. Regenerate: npm run og -->
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Geist+Mono:wght@500&family=Geist:wght@400;700&display=block" />
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #0B0D1A; color: #ECEAF6; }
+  .haze { position: absolute; border-radius: 50%; }
+  .v { width: 1000px; height: 820px; left: 560px; top: -420px; background: radial-gradient(closest-side, rgba(118,92,214,.34), transparent); }
+  .b { width: 900px; height: 800px; left: -460px; top: 120px; background: radial-gradient(closest-side, rgba(64,120,214,.22), transparent); }
+  .v2 { width: 760px; height: 640px; left: 760px; top: 360px; opacity: .7; background: radial-gradient(closest-side, rgba(118,92,214,.34), transparent); }
+  .stars { position: absolute; inset: 0; }
+  .wrap { position: absolute; inset: 0; padding: 64px 72px; display: flex; flex-direction: column; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 12px; font: 700 28px 'Bricolage Grotesque', system-ui; letter-spacing: -0.02em; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: #B4BEFF; box-shadow: 0 0 18px rgba(180,190,255,.3); }
+  .eyebrow { font: 500 15px 'Geist Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: #A3A6BF; margin-bottom: 28px; }
+  h1 { margin: 0; font: 800 112px/0.92 'Bricolage Grotesque', system-ui; letter-spacing: -0.045em; }
+  h1 span { color: #B4BEFF; }
+</style>
+</head>
+<body>
+  <div class="haze v"></div><div class="haze b"></div><div class="haze v2"></div>
+  <div class="stars" id="stars"></div>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span>classfolio</div>
+    <div>
+      <div class="eyebrow">AI Engineering &amp; Career Accelerator — by Mohammad Kabajah</div>
+      <h1>Everyone’s corner<br />of <span>the internet.</span></h1>
+    </div>
+  </div>
+  <script>
+    let s = 7; const r = () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
+    const el = document.getElementById('stars');
+    [[1, 50, .6], [1.5, 28, .75], [2, 12, .9]].forEach(([size, n, o]) => {
+      const d = document.createElement('div');
+      d.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;opacity:${o};box-shadow:` +
+        Array.from({ length: n }, () => `${(r() * 1200).toFixed(0)}px ${(r() * 630).toFixed(0)}px 0 0 #E6E9FF`).join(',');
+      el.appendChild(d);
+    });
+  </script>
+</body>
+</html>

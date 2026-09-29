@@ -1,0 +1,72 @@
+.form-modal {
+  max-width: 560px;
+}
+
+.form-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px;
+}
+
+.form-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.form-modal-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 40px;
+}
+
+.form-fields {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-modal-actions .btn-text {
+  font-size: 15px;
+}
+
+/* ---- As a bottom sheet ---- */
+
+.modal--sheet .form-modal-form {
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+  padding: 0;
+}
+
+.modal--sheet .form-modal-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  gap: 24px;
+  padding: 4px 20px 24px;
+}
+
+.modal--sheet .form-modal-head {
+  gap: 10px;
+}
+
+.modal--sheet .modal-title {
+  font-size: 32px;
+}
+
+.modal--sheet .form-modal-actions {
+  flex: none;
+  padding: 12px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.modal--sheet .form-modal-actions .btn-primary {
+  width: 100%;
+  height: 52px;
+}

@@ -1,0 +1,70 @@
+.hero {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  align-items: end;
+  padding: 64px var(--pad-x) 56px;
+}
+
+.hero-main {
+  grid-column: 1 / span 8;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero-eyebrow {
+  color: var(--muted);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 96px;
+  line-height: 0.92;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  font-optical-sizing: auto;
+  white-space: nowrap;
+}
+
+.hero-accent {
+  color: var(--accent);
+}
+
+
+/* Between the tablet breakpoint and the 1440 design width, scale the H1 so it stays within 8 columns. */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .hero-title {
+    font-size: 6.6vw;
+  }
+}
+
+@media (max-width: 1199px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .hero-title {
+    font-size: 72px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    gap: 18px;
+    padding: 36px var(--pad-x) 32px;
+  }
+  .hero-main {
+    gap: 18px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+  }
+  .hero-title {
+    font-size: 46px;
+    line-height: 0.94;
+    white-space: normal;
+  }
+}
