@@ -70,7 +70,8 @@ export function SiteFormModal({ mode, initial, sheet, onClose, onSubmit }: SiteF
     setSubmitError(false)
     try {
       await onSubmit(input, honeypotRef.current?.value ?? '')
-    } catch {
+    } catch (err) {
+      console.error('classfolio: saving the site failed', err)
       setSubmitError(true)
       setSubmitting(false)
     }

@@ -65,7 +65,10 @@ export default function App() {
         setSites(sortSites(rows))
         setStatus('ready')
       })
-      .catch(() => setStatus('error'))
+      .catch((err) => {
+        console.error('classfolio: loading the gallery failed', err)
+        setStatus('error')
+      })
   }, [])
 
   useEffect(load, [load])
