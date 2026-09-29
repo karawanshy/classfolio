@@ -28,7 +28,7 @@ src/
   lib/preview.ts       screenshot URL (VITE_SCREENSHOT_URL_TEMPLATE, default Microlink)
   components/
     Wall.tsx           masonry: flat list positioned with transforms (FLIP), 3/2/1 columns
-    SiteCard.tsx       card = frame link + caption (name, GitHub, Visit) + reactions row + admin buttons
+    SiteCard.tsx       card = frame (not a link; only Visit opens the site) + caption (name, GitHub, Visit) + reactions row + admin buttons
     Odometer.tsx       rolling digits; `format` prop (default: zero-padded to 2)
     icons.tsx          all icons via the `Icon` wrapper (24 viewBox, stroke 1.8, round caps/joins)
     Header, Hero, Toolbar, Footer, Modal, SmallModals, SiteFormModal, States, SpaceBackground

@@ -18,7 +18,7 @@ interface WallProps {
   exitKind: ExitKind
   onEdit: (site: Site, trigger: HTMLElement) => void
   onDelete: (site: Site, trigger: HTMLElement) => void
-  onFrameRef: (id: string, el: HTMLAnchorElement | null) => void
+  onVisitRef: (id: string, el: HTMLAnchorElement | null) => void
 }
 
 const EXIT_MS: Record<ExitKind, number> = { filter: 150, delete: 300 }
@@ -135,7 +135,7 @@ export function Wall(props: WallProps) {
         >
           <Reveal id={item.key} hold={item.key === props.holdRevealId}>
             <SiteCard
-                ref={(el) => props.onFrameRef(item.site.id, el)}
+                ref={(el) => props.onVisitRef(item.site.id, el)}
                 site={item.site}
                 isAdmin={props.isAdmin}
                 justAdded={props.justAdded.has(item.site.id)}

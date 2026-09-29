@@ -31,15 +31,11 @@
 }
 
 .card:hover .card-frame,
-.card-frame:focus-visible {
+.card:has(.card-visit:focus-visible) .card-frame {
   transform: translateY(-6px);
   box-shadow:
     0 0 0 1px var(--accent),
     0 40px 90px -30px var(--glow);
-}
-
-.card-frame:focus-visible {
-  outline: none;
 }
 
 .card-host {
@@ -59,10 +55,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.card-host svg {
-  flex: none;
 }
 
 .card-shot-wrap {
@@ -130,7 +122,7 @@
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   /* Lean in: after 450ms, scroll the full-page capture down to its end over ~9s. */
   .card:hover .shot--tall img,
-  .card-frame:focus-visible .shot--tall img {
+  .card:has(.card-visit:focus-visible) .shot--tall img {
     transform: translateY(calc(-100% + 62.5cqw));
     transition:
       opacity 400ms ease,
@@ -138,7 +130,7 @@
   }
 
   .card:hover .shot--viewport img,
-  .card-frame:focus-visible .shot--viewport img {
+  .card:has(.card-visit:focus-visible) .shot--viewport img {
     transform: scale(1.03);
     transition:
       opacity 400ms ease,

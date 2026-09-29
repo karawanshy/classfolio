@@ -31,7 +31,7 @@ interface SiteCardProps {
 
 export const SiteCard = forwardRef<HTMLAnchorElement, SiteCardProps>(function SiteCard(
   { site, isAdmin, justAdded, onEdit, onDelete },
-  frameRef,
+  visitRef,
 ) {
   // Keyed on the visible values so an edit cross-fades the card to its new content.
   const version = [site.creator_name, site.site_url, site.github_url ?? ''].join('\u0000')
@@ -39,23 +39,16 @@ export const SiteCard = forwardRef<HTMLAnchorElement, SiteCardProps>(function Si
   return (
     <article className="card" data-site-id={site.id}>
       <div key={version} className="card-content">
-        <a
-          ref={frameRef}
-          className="card-frame"
-          href={site.site_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${site.creator_name}’s website`}
-        >
+        {/* Not a link: only the Visit button opens the site. The frame still lifts and peeks on hover. */}
+        <div className="card-frame">
           <span className="card-host">
             <span className="card-host-text">{displayHost(site.site_url)}</span>
-            <ArrowUpRightIcon size={12} />
           </span>
           <span className="card-shot-wrap">
             <Screenshot src={previewFor(site)} alt={`Screenshot of ${site.creator_name}’s website`} retry={justAdded} />
             {justAdded && <span className="card-badge">Just added</span>}
           </span>
-        </a>
+        </div>
 
         <div className="card-caption">
           <h3 className="card-name">{site.creator_name}</h3>
@@ -71,7 +64,7 @@ export const SiteCard = forwardRef<HTMLAnchorElement, SiteCardProps>(function Si
                 <GitHubIcon size={18} />
               </a>
             )}
-            <a className="card-visit card-btn" href={site.site_url} target="_blank" rel="noopener noreferrer">
+            <a ref={visitRef} className="card-visit card-btn" href={site.site_url} target="_blank" rel="noopener noreferrer">
               Visit
               <ArrowUpRightIcon size={14} />
               <span className="visually-hidden"> {site.creator_name}’s website (opens in a new tab)</span>

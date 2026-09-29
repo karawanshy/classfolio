@@ -53,7 +53,7 @@ export default function App() {
   const [announcement, setAnnouncement] = useState('')
 
   const triggerRef = useRef<HTMLElement | null>(null)
-  const frameRefs = useRef(new Map<string, HTMLAnchorElement>())
+  const visitRefs = useRef(new Map<string, HTMLAnchorElement>())
   const mainRef = useRef<HTMLElement>(null)
 
   /* ---- Data ---- */
@@ -172,11 +172,11 @@ export default function App() {
     // Wait for the modal to unmount and the wall to settle before scrolling.
     requestAnimationFrame(() =>
       requestAnimationFrame(() => {
-        const frame = frameRefs.current.get(site.id)
-        const card = frame?.closest('.wall-item')
-        if (!frame || !card) return restoreFocus()
+        const visit = visitRefs.current.get(site.id)
+        const card = visit?.closest('.wall-item')
+        if (!visit || !card) return restoreFocus()
         card.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' })
-        frame.focus({ preventScroll: true })
+        visit.focus({ preventScroll: true })
       }),
     )
   }
@@ -197,7 +197,7 @@ export default function App() {
     setSites((prev) => prev.filter((s) => s.id !== site.id))
     setAnnouncement(`${site.creator_name}’s website was deleted.`)
     requestAnimationFrame(() => {
-      const next = neighbour ? frameRefs.current.get(neighbour.id) : null
+      const next = neighbour ? visitRefs.current.get(neighbour.id) : null
       ;(next ?? mainRef.current)?.focus({ preventScroll: true })
     })
     api.remove(site.id).catch(() => {
@@ -225,9 +225,9 @@ export default function App() {
     mainRef.current?.focus({ preventScroll: true })
   }
 
-  const onFrameRef = useCallback((id: string, el: HTMLAnchorElement | null) => {
-    if (el) frameRefs.current.set(id, el)
-    else frameRefs.current.delete(id)
+  const onVisitRef = useCallback((id: string, el: HTMLAnchorElement | null) => {
+    if (el) visitRefs.current.set(id, el)
+    else visitRefs.current.delete(id)
   }, [])
 
   /* ---- Layout ---- */
@@ -264,7 +264,7 @@ export default function App() {
         exitKind={exitKind}
         onEdit={(site, trigger) => openModal({ kind: 'edit', site }, trigger)}
         onDelete={(site, trigger) => openModal({ kind: 'delete', site }, trigger)}
-        onFrameRef={onFrameRef}
+        onVisitRef={onVisitRef}
       />
     )
   }
