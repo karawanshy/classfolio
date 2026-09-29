@@ -46,6 +46,7 @@ Set the same variables in your host's dashboard (Netlify, Vercel, Cloudflare Pag
 
    **Where credentials live:** admin emails and passwords are stored only in Supabase Auth (`auth.users`, with passwords hashed by bcrypt). They are never in this repo, in env vars or in the frontend bundle. `public.admins` holds only user IDs. To change a password, use Authentication → Users → the user's menu → *Send password recovery*, or set a new one from the dashboard.
 5. Log in on the site with the pen icon in the header.
+6. **Reactions:** apply the later migrations too (`supabase db push` applies them all). Then turn on Authentication → Sign In / Providers → *Allow anonymous sign-ins*. Each visitor gets an anonymous session on their first reaction, and that session is how the site remembers which reactions are theirs. Supabase also refuses anonymous sign-ins while *Allow new users to sign up* is off, so if you turned it off in step 3, turn it back on. This is safe: a non-admin account can only do what an anonymous visitor can (react), and the site signs non-admins straight back out. Consider enabling CAPTCHA under Authentication → Attack Protection.
 
 ### What the database enforces
 

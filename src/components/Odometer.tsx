@@ -1,19 +1,22 @@
 import { useState } from 'react'
 import { useReducedMotion } from '../lib/hooks'
 
-/** Zero-padded count whose changed digits roll (old slides up and out, new slides in from below). */
-export function Odometer({ value }: { value: number | null }) {
+const padTwo = (n: number) => String(n).padStart(2, '0')
+
+/** Count whose changed characters roll (old slides up and out, new slides in from below). Zero-padded by default. */
+export function Odometer({ value, format = padTwo }: { value: number | null; format?: (n: number) => string }) {
   const reduced = useReducedMotion()
-  const text = value === null ? '—' : String(value).padStart(2, '0')
-  const [state, setState] = useState({ text, prev: null as string | null, dir: 1, n: 0 })
+  const text = value === null ? '—' : format(value)
+  const [state, setState] = useState({ text, value, prev: null as string | null, dir: 1, n: 0 })
 
   // Derive the transition during render when the value changes.
   if (state.text !== text) {
-    const animate = !reduced && state.text !== '—' && text !== '—'
+    const animate = !reduced && state.value !== null && value !== null
     setState({
       text,
+      value,
       prev: animate ? state.text : null,
-      dir: Number(text) >= Number(state.text) ? 1 : -1,
+      dir: (value ?? 0) >= (state.value ?? 0) ? 1 : -1,
       n: state.n + 1,
     })
   }
