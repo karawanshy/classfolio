@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: space-between;
   height: 44px;
-  padding: 0 4px 0 var(--pad-x);
+  padding: 0 var(--pad-x);
   background: rgba(180, 190, 255, 0.12);
   border-bottom: 1px solid rgba(180, 190, 255, 0.35);
 }
@@ -29,10 +29,6 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.admin-bar .admin-bar-logout {
-  height: 44px;
 }
 
 .header {
@@ -112,5 +108,9 @@
   }
   .header-actions {
     gap: 8px;
+  }
+  .header-logout {
+    height: 44px;
+    padding: 0 20px;
   }
 }

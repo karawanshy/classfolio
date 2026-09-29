@@ -20,9 +20,6 @@ export function Header({ isAdmin, isMobile, onAdd, onLogin, onLogout }: HeaderPr
             <PencilIcon size={13} />
             Editing
           </span>
-          <button type="button" className="btn-text admin-bar-logout" onClick={onLogout}>
-            Log out
-          </button>
         </div>
       )}
       <header className="header">
@@ -32,37 +29,40 @@ export function Header({ isAdmin, isMobile, onAdd, onLogin, onLogout }: HeaderPr
         </a>
         <div className="header-actions">
           {isAdmin ? (
-            !isMobile && (
-              <>
+            <>
+              {!isMobile && (
                 <span className="editing-chip">
                   <PencilIcon size={14} />
                   Editing
                 </span>
-                <button type="button" className="btn-text" onClick={onLogout}>
-                  Log out
+              )}
+              {/* Admins manage entries; adding is for students, so Log out takes the primary slot. */}
+              <button type="button" className="btn btn-primary header-logout" onClick={onLogout}>
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                className="icon-circle"
+                aria-label="Edit gallery (admin login)"
+                title="Admin"
+                onClick={onLogin}
+              >
+                <PencilIcon size={17} />
+              </button>
+              {isMobile ? (
+                <button type="button" className="icon-circle add-circle" aria-label="Add your website" onClick={onAdd}>
+                  <PlusIcon size={18} />
                 </button>
-              </>
-            )
-          ) : (
-            <button
-              type="button"
-              className="icon-circle"
-              aria-label="Edit gallery (admin login)"
-              title="Admin"
-              onClick={onLogin}
-            >
-              <PencilIcon size={17} />
-            </button>
-          )}
-          {isMobile ? (
-            <button type="button" className="icon-circle add-circle" aria-label="Add your website" onClick={onAdd}>
-              <PlusIcon size={18} />
-            </button>
-          ) : (
-            <button type="button" className="btn btn-primary" onClick={onAdd}>
-              <PlusIcon size={16} />
-              Add your website
-            </button>
+              ) : (
+                <button type="button" className="btn btn-primary" onClick={onAdd}>
+                  <PlusIcon size={16} />
+                  Add your website
+                </button>
+              )}
+            </>
           )}
         </div>
       </header>
